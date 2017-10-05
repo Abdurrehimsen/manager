@@ -1,0 +1,2 @@
+class UnitListLine < ApplicationRecord
+end

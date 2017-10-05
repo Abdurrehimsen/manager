@@ -1,0 +1,2 @@
+class ModeListLine < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class ReagentListLine < ApplicationRecord
+end

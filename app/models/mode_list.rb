@@ -1,0 +1,2 @@
+class ModeList < ApplicationRecord
+end

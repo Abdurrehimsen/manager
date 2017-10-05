@@ -1,0 +1,2 @@
+class DataList < ApplicationRecord
+end
