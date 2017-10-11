@@ -10,12 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171005204205) do
+ActiveRecord::Schema.define(version: 20171008072901) do
 
   create_table "analytes", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "program_id"
+    t.index ["program_id"], name: "index_analytes_on_program_id"
+  end
+
+  create_table "data", force: :cascade do |t|
+    t.integer "value"
+    t.boolean "is_str"
+    t.integer "user_id"
+    t.integer "term_id"
+    t.integer "program_id"
+    t.integer "analyte_id"
+    t.integer "unit_id"
+    t.integer "mode_id"
+    t.integer "reagent_id"
+    t.integer "data_list_line_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["analyte_id"], name: "index_data_on_analyte_id"
+    t.index ["data_list_line_id"], name: "index_data_on_data_list_line_id"
+    t.index ["mode_id"], name: "index_data_on_mode_id"
+    t.index ["program_id"], name: "index_data_on_program_id"
+    t.index ["reagent_id"], name: "index_data_on_reagent_id"
+    t.index ["term_id"], name: "index_data_on_term_id"
+    t.index ["unit_id"], name: "index_data_on_unit_id"
+    t.index ["user_id"], name: "index_data_on_user_id"
   end
 
   create_table "data_list_lines", force: :cascade do |t|
@@ -113,29 +138,6 @@ ActiveRecord::Schema.define(version: 20171005204205) do
     t.boolean "mgr"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  create_table "veris", force: :cascade do |t|
-    t.integer "value"
-    t.boolean "is_str"
-    t.integer "user_id"
-    t.integer "term_id"
-    t.integer "program_id"
-    t.integer "analyte_id"
-    t.integer "unit_id"
-    t.integer "mode_id"
-    t.integer "reagent_id"
-    t.integer "data_list_line_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["analyte_id"], name: "index_veris_on_analyte_id"
-    t.index ["data_list_line_id"], name: "index_veris_on_data_list_line_id"
-    t.index ["mode_id"], name: "index_veris_on_mode_id"
-    t.index ["program_id"], name: "index_veris_on_program_id"
-    t.index ["reagent_id"], name: "index_veris_on_reagent_id"
-    t.index ["term_id"], name: "index_veris_on_term_id"
-    t.index ["unit_id"], name: "index_veris_on_unit_id"
-    t.index ["user_id"], name: "index_veris_on_user_id"
   end
 
 end

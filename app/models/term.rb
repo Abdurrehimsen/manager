@@ -1,3 +1,3 @@
 class Term < ApplicationRecord
-	has_many :veris, dependent: :destroy
+	has_many :data, dependent: :destroy
 end

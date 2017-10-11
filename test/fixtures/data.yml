@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  value: 1
+  is_str: false
+  user: one
+  term: one
+  program: one
+  analyte: one
+  unit: one
+  mode: one
+  reagent: one
+  data_list_line: one
+
+two:
+  value: 1
+  is_str: false
+  user: two
+  term: two
+  program: two
+  analyte: two
+  unit: two
+  mode: two
+  reagent: two
+  data_list_line: two
