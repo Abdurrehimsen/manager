@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @analyte.name %>
+</p>
+
+<%= link_to 'Edit', edit_program_analyte_path(@program, @analyte) %>
+<%= link_to 'Back', program_analytes_url(@program) %>

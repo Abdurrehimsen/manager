@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Analytes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @analytes.each do |analyte| %>
+      <tr>
+        <td><%= analyte.name %></td>
+        <td><%= link_to 'Show', program_analyte_path(@program, analyte) %></td>
+        <td><%= link_to 'Edit', edit_program_analyte_path(@program, analyte) %></td>
+        <td><%= link_to 'Destroy', [@program, analyte], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Unit List', analyte.unit_list %></td>
+        <td><%= link_to 'Mode List', analyte.mode_list %></td>
+        <td><%= link_to 'Reagent List', analyte.reagent_list %></td>
+        <td><%= link_to 'Data List', analyte.data_list %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Analyte', new_program_analyte_path %> |
+<%= link_to 'Back to Programs', {controller: "programs", action: "index" } %>

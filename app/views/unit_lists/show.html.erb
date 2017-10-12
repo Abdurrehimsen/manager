@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @unit_list.name %>
+</p>
+
+<%= link_to 'Edit', edit_unit_list_path(@unit_list) %> |
+<%= link_to "back", request.referer.present? ? request.referer : default_path %>

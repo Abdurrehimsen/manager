@@ -10,14 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008072901) do
+ActiveRecord::Schema.define(version: 20171008080741) do
 
   create_table "analytes", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "program_id"
+    t.integer "reagent_list_id"
+    t.integer "unit_list_id"
+    t.integer "mode_list_id"
+    t.integer "data_list_id"
+    t.index ["data_list_id"], name: "index_analytes_on_data_list_id"
+    t.index ["mode_list_id"], name: "index_analytes_on_mode_list_id"
     t.index ["program_id"], name: "index_analytes_on_program_id"
+    t.index ["reagent_list_id"], name: "index_analytes_on_reagent_list_id"
+    t.index ["unit_list_id"], name: "index_analytes_on_unit_list_id"
   end
 
   create_table "data", force: :cascade do |t|
@@ -47,6 +55,8 @@ ActiveRecord::Schema.define(version: 20171008072901) do
     t.integer "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "data_list_id"
+    t.index ["data_list_id"], name: "index_data_list_lines_on_data_list_id"
   end
 
   create_table "data_lists", force: :cascade do |t|
@@ -59,6 +69,8 @@ ActiveRecord::Schema.define(version: 20171008072901) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "mode_list_id"
+    t.index ["mode_list_id"], name: "index_mode_list_lines_on_mode_list_id"
   end
 
   create_table "mode_lists", force: :cascade do |t|
@@ -71,6 +83,8 @@ ActiveRecord::Schema.define(version: 20171008072901) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "mode_list_line_id"
+    t.index ["mode_list_line_id"], name: "index_modes_on_mode_list_line_id"
   end
 
   create_table "programs", force: :cascade do |t|
@@ -89,12 +103,16 @@ ActiveRecord::Schema.define(version: 20171008072901) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "reagent_list_id"
+    t.index ["reagent_list_id"], name: "index_reagent_lists_on_reagent_list_id"
   end
 
   create_table "reagents", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "reagent_list_line_id"
+    t.index ["reagent_list_line_id"], name: "index_reagents_on_reagent_list_line_id"
   end
 
   create_table "terms", force: :cascade do |t|
@@ -108,6 +126,8 @@ ActiveRecord::Schema.define(version: 20171008072901) do
     t.integer "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "unit_list_id"
+    t.index ["unit_list_id"], name: "index_unit_list_lines_on_unit_list_id"
   end
 
   create_table "unit_lists", force: :cascade do |t|
@@ -120,6 +140,8 @@ ActiveRecord::Schema.define(version: 20171008072901) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "unit_list_line_id"
+    t.index ["unit_list_line_id"], name: "index_units_on_unit_list_line_id"
   end
 
   create_table "users", force: :cascade do |t|

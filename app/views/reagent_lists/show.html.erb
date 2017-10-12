@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @reagent_list.name %>
+</p>
+
+<%= link_to 'Edit', edit_reagent_list_path(@reagent_list) %> |
+<%= link_to "back", request.referer.present? ? request.referer : default_path %>

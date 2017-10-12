@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @mode_list.name %>
+</p>
+
+<%= link_to 'Edit', edit_mode_list_path(@mode_list) %> |
+<%= link_to "back", request.referer.present? ? request.referer : default_path %>
