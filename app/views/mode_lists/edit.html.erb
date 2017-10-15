@@ -2,5 +2,6 @@
 
 <%= render 'form', mode_list: @mode_list %>
 
-<%= link_to 'Show', @mode_list %> |
-<%= link_to 'Back', mode_lists_path %>
+<%= link_to 'Show', program_analyte_mode_list_path(@program, @analyte, @mode_list) %> |
+<%= link_to 'Back', program_analyte_mode_list_path(@program, @analyte, @mode_list) %>
+

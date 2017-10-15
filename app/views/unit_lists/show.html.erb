@@ -5,5 +5,5 @@
   <%= @unit_list.name %>
 </p>
 
-<%= link_to 'Edit', edit_unit_list_path(@unit_list) %> |
-<%= link_to "back", request.referer.present? ? request.referer : default_path %>
+<%= link_to 'Edit', edit_program_analyte_unit_list_path(params[:program_id], params[:analyte_id], @unit_list) %> |
+<%= link_to "back", program_analytes_path(params[:program_id]) %>

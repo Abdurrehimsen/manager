@@ -5,5 +5,5 @@
   <%= @data_list.name %>
 </p>
 
-<%= link_to 'Edit', edit_data_list_path(@data_list) %> |
-<%= link_to "back", request.referer.present? ? request.referer : default_path %>
+<%= link_to 'Edit', edit_program_analyte_data_list_path(params[:program_id], params[:analyte_id], @data_list) %> |
+<%= link_to "back", program_analytes_path(params[:program_id]) %>

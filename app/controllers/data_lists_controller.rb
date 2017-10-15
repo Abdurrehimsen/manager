@@ -14,21 +14,29 @@ class DataListsController < ApplicationController
 
   # GET /data_lists/new
   def new
+    @program = Program.find(params[:program_id])
+    @analyte = Analyte.find(params[:analyte_id])
     @data_list = DataList.new
   end
 
   # GET /data_lists/1/edit
   def edit
+    @program = Program.find(params[:program_id])
+    @analyte = Analyte.find(params[:analyte_id])
   end
 
   # POST /data_lists
   # POST /data_lists.json
   def create
+    @program = Program.find(params[:program_id])
+    @analyte = Analyte.find(params[:analyte_id])
     @data_list = DataList.new(data_list_params)
 
     respond_to do |format|
       if @data_list.save
-        format.html { redirect_to @data_list, notice: 'Data list was successfully created.' }
+        @analyte.data_list_id = @data_list.id
+        @analyte.save
+        format.html { redirect_to program_analyte_data_list_path(@program, @analyte, @data_list), notice: 'Data list was successfully created.' }
         format.json { render :show, status: :created, location: @data_list }
       else
         format.html { render :new }
@@ -40,9 +48,11 @@ class DataListsController < ApplicationController
   # PATCH/PUT /data_lists/1
   # PATCH/PUT /data_lists/1.json
   def update
+    @program = Program.find(params[:program_id])
+    @analyte = Analyte.find(params[:analyte_id])
     respond_to do |format|
       if @data_list.update(data_list_params)
-        format.html { redirect_to @data_list, notice: 'Data list was successfully updated.' }
+        format.html { redirect_to program_analyte_data_list_path(@program, @analyte, @data_list), notice: 'Data list was successfully updated.' }
         format.json { render :show, status: :ok, location: @data_list }
       else
         format.html { render :edit }

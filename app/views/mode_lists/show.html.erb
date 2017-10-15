@@ -5,5 +5,5 @@
   <%= @mode_list.name %>
 </p>
 
-<%= link_to 'Edit', edit_mode_list_path(@mode_list) %> |
-<%= link_to "back", request.referer.present? ? request.referer : default_path %>
+<%= link_to 'Edit', edit_program_analyte_mode_list_path(params[:program_id], params[:analyte_id], @mode_list) %> |
+<%= link_to "back", program_analytes_path(params[:program_id]) %>

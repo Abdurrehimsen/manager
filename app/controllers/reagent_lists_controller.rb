@@ -14,21 +14,30 @@ class ReagentListsController < ApplicationController
 
   # GET /reagent_lists/new
   def new
+    @program = Program.find(params[:program_id])
+    @analyte = Analyte.find(params[:analyte_id])
     @reagent_list = ReagentList.new
   end
 
   # GET /reagent_lists/1/edit
   def edit
+    @program = Program.find(params[:program_id])
+    @analyte = Analyte.find(params[:analyte_id])
+    @reagent_list = @analyte.unit_list
   end
 
   # POST /reagent_lists
   # POST /reagent_lists.json
   def create
+    @program = Program.find(params[:program_id])
+    @analyte = Analyte.find(params[:analyte_id])
     @reagent_list = ReagentList.new(reagent_list_params)
 
     respond_to do |format|
       if @reagent_list.save
-        format.html { redirect_to @reagent_list, notice: 'Reagent list was successfully created.' }
+        @analyte.reagent_list_id = @reagent_list.id
+        @analyte.save
+        format.html { redirect_to program_analyte_reagent_list_path(@program, @analyte, @reagent_list), notice: 'Reagent list was successfully created.' }
         format.json { render :show, status: :created, location: @reagent_list }
       else
         format.html { render :new }
@@ -40,9 +49,11 @@ class ReagentListsController < ApplicationController
   # PATCH/PUT /reagent_lists/1
   # PATCH/PUT /reagent_lists/1.json
   def update
+    @program = Program.find(params[:program_id])
+    @analyte = Analyte.find(params[:analyte_id])
     respond_to do |format|
       if @reagent_list.update(reagent_list_params)
-        format.html { redirect_to @reagent_list, notice: 'Reagent list was successfully updated.' }
+        format.html { redirect_to program_analyte_reagent_list_path(@program, @analyte, @reagent_list), notice: 'Reagent list was successfully updated.' }
         format.json { render :show, status: :ok, location: @reagent_list }
       else
         format.html { render :edit }
@@ -56,7 +67,7 @@ class ReagentListsController < ApplicationController
   def destroy
     @reagent_list.destroy
     respond_to do |format|
-      format.html { redirect_to reagent_lists_url, notice: 'Reagent list was successfully destroyed.' }
+      format.html { redirect_to program_analyte_reagent_list_path(@program, @analyte, @reagent_list), notice: 'Reagent list was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -17,10 +17,14 @@
         <td><%= link_to 'Show', program_analyte_path(@program, analyte) %></td>
         <td><%= link_to 'Edit', edit_program_analyte_path(@program, analyte) %></td>
         <td><%= link_to 'Destroy', [@program, analyte], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Unit List', analyte.unit_list %></td>
-        <td><%= link_to 'Mode List', analyte.mode_list %></td>
-        <td><%= link_to 'Reagent List', analyte.reagent_list %></td>
-        <td><%= link_to 'Data List', analyte.data_list %></td>
+        <td><%= link_to 'Unit List', analyte.unit_list == nil ? new_program_analyte_unit_list_path(@program, analyte) : program_analyte_unit_list_path(@program, analyte, analyte.unit_list)%></td>
+         <td><%= link_to 'Mode List', analyte.mode_list == nil ? new_program_analyte_mode_list_path(@program, analyte) : program_analyte_mode_list_path(@program, analyte, analyte.mode_list) %></td>
+
+        <td><%= link_to 'Reagent List', analyte.reagent_list == nil ? new_program_analyte_reagent_list_path(@program, analyte) : program_analyte_reagent_list_path(@program, analyte, analyte.reagent_list) %></td>
+
+        <td><%= link_to 'Data List', analyte.data_list == nil ? new_program_analyte_data_list_path(@program, analyte) : program_analyte_data_list_path(@program, analyte, analyte.data_list) %></td>
+
+       
       </tr>
     <% end %>
   </tbody>

@@ -14,21 +14,30 @@ class UnitListsController < ApplicationController
 
   # GET /unit_lists/new
   def new
+    @program = Program.find(params[:program_id])
+    @analyte = Analyte.find(params[:analyte_id])
     @unit_list = UnitList.new
   end
 
   # GET /unit_lists/1/edit
   def edit
+    @program = Program.find(params[:program_id])
+    @analyte = Analyte.find(params[:analyte_id])
+    @unit_list = @analyte.unit_list
   end
 
   # POST /unit_lists
   # POST /unit_lists.json
   def create
+    @program = Program.find(params[:program_id])
+    @analyte = Analyte.find(params[:analyte_id])
     @unit_list = UnitList.new(unit_list_params)
 
     respond_to do |format|
       if @unit_list.save
-        format.html { redirect_to @unit_list, notice: 'Unit list was successfully created.' }
+        @analyte.mode_list_id = @unit_list.id
+        @analyte.save
+        format.html { redirect_to program_analyte_unit_list_path(@program, @analyte, @unit_list), notice: 'Unit list was successfully created.' }
         format.json { render :show, status: :created, location: @unit_list }
       else
         format.html { render :new }
@@ -40,9 +49,11 @@ class UnitListsController < ApplicationController
   # PATCH/PUT /unit_lists/1
   # PATCH/PUT /unit_lists/1.json
   def update
+    @program = Program.find(params[:program_id])
+    @analyte = Analyte.find(params[:analyte_id])
     respond_to do |format|
       if @unit_list.update(unit_list_params)
-        format.html { redirect_to @unit_list, notice: 'Unit list was successfully updated.' }
+        format.html { redirect_to program_analyte_unit_list_path(@program, @analyte, @unit_list), notice: 'Unit list was successfully updated.' }
         format.json { render :show, status: :ok, location: @unit_list }
       else
         format.html { render :edit }

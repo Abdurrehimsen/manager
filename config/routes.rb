@@ -8,13 +8,15 @@ Rails.application.routes.draw do
 
 
   resources :programs do
-	resources :analytes
+	 resources :analytes do
+      resources :unit_lists
+      resources :data_lists
+      resources :mode_lists
+      resources :reagent_lists
+    end
   end
 
-  resources :data_lists
-  resources :unit_lists
-  resources :mode_lists
-  resources :reagent_lists
+  
   
 
 end

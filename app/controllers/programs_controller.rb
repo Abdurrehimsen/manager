@@ -4,6 +4,9 @@ class ProgramsController < ApplicationController
   # GET /programs
   # GET /programs.json
   def index
+    if(!user_signed_in?)
+      redirect_to new_user_session_path, :notice => 'Önce giriş yapın'
+    end
     @programs = Program.all
   end
 

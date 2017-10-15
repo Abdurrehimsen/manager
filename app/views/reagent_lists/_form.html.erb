@@ -1,4 +1,4 @@
-<%= form_with(model: reagent_list, local: true) do |form| %>
+<%= form_with(model: [@program, @analyte, reagent_list], local: true) do |form| %>
   <% if reagent_list.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(reagent_list.errors.count, "error") %> prohibited this reagent_list from being saved:</h2>
