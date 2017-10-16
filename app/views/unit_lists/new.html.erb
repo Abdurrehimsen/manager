@@ -2,4 +2,4 @@
 
 <%= render 'form', unit_list: @unit_list %>
 
-<%= link_to 'Back', program_analytes_path(@program) %>
+<%= link_to 'Back', params[:program_id] != nil ? program_analytes_path(@program) : unit_lists_path %>

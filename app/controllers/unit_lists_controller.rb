@@ -28,8 +28,8 @@ class UnitListsController < ApplicationController
     @unit_list = UnitList.new(unit_list_params)
 
     respond_to do |format|
-      if params[:program_id] != nil
-        if @unit_list.save
+      if @unit_list.save
+        if params[:program_id] != nil        
           @analyte.mode_list_id = @unit_list.id
           @analyte.save
           format.html { redirect_to program_analyte_unit_list_path(@program, @analyte, @unit_list), notice: 'Unit list was successfully created.' }

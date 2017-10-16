@@ -1,24 +1,23 @@
-# README
+Tamamlanan yönetici ve kullanıcı rolleri
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Yönetici Rolü
 
-Things you may want to cover:
+1. Program CRUD ekranlarını tasarla
+2. Bir Program seç
+3. Ona bağlı Analyte'leri CRUD ekranlarını tasarla
+4. Bir Analyte seç
+5. Ona bağlı UnitList'i, MethodList'i, DataList'i, ReagentList'i seç
 
-* Ruby version
+Kullanıcı Rolü
 
-* System dependencies
+1. UnitList CRUD
+2. UnitList'e bağlı UnitListLine CRUD
 
-* Configuration
+3. MethodList CRUD
+4. MethodList'e bağlı MethodListLine CRUD
 
-* Database creation
+5. ReagentList CRUD
+6. ReagentList'e bağlı ReagentListLine CRUD
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+7. DataList CRUD
+8. DataList'e bağlı DataListLine CRUD
