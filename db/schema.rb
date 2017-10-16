@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171008080741) do
+ActiveRecord::Schema.define(version: 20171016163851) do
 
   create_table "analytes", force: :cascade do |t|
     t.string "name"
@@ -97,6 +97,8 @@ ActiveRecord::Schema.define(version: 20171008080741) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "reagent_list_id"
+    t.index ["reagent_list_id"], name: "index_reagent_list_lines_on_reagent_list_id"
   end
 
   create_table "reagent_lists", force: :cascade do |t|

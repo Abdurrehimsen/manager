@@ -29,10 +29,15 @@ class DataListsController < ApplicationController
 
     respond_to do |format|
       if @data_list.save
-        @analyte.data_list_id = @data_list.id
-        @analyte.save
-        format.html { redirect_to program_analyte_data_list_path(@program, @analyte, @data_list), notice: 'Data list was successfully created.' }
-        format.json { render :show, status: :created, location: @data_list }
+        if params[:program_id] != nil
+          @analyte.data_list_id = @data_list.id
+          @analyte.save
+          format.html { redirect_to program_analyte_data_list_path(@program, @analyte, @data_list), notice: 'Data list was successfully created.' }
+          format.json { render :show, status: :created, location: [@program, @analyte, @data_list] }
+        else
+          format.html { redirect_to data_list_path(@data_list), notice: 'Data list was successfully created.' }
+          format.json { render :show, status: :created, location: @data_list }
+        end
       else
         format.html { render :new }
         format.json { render json: @data_list.errors, status: :unprocessable_entity }
@@ -45,8 +50,13 @@ class DataListsController < ApplicationController
   def update
     respond_to do |format|
       if @data_list.update(data_list_params)
-        format.html { redirect_to program_analyte_data_list_path(@program, @analyte, @data_list), notice: 'Data list was successfully updated.' }
-        format.json { render :show, status: :ok, location: @data_list }
+        if params[:program_id] != nil
+          format.html { redirect_to program_analyte_data_list_path(@program, @analyte, @data_list), notice: 'Data list was successfully updated.' }
+          format.json { render :show, status: :ok, location: [@program, @analyte, @data_list] }
+        else
+          format.html { redirect_to data_list_path(@data_list), notice: 'Data list was successfully updated.' }
+          format.json { render :show, status: :created, location: @data_list }
+        end
       else
         format.html { render :edit }
         format.json { render json: @data_list.errors, status: :unprocessable_entity }
@@ -59,8 +69,13 @@ class DataListsController < ApplicationController
   def destroy
     @data_list.destroy
     respond_to do |format|
-      format.html { redirect_to data_lists_url, notice: 'Data list was successfully destroyed.' }
-      format.json { head :no_content }
+      if params[:program_id] != nil
+        format.html { redirect_to program_analytes_url(@program), notice: 'Mode list was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to data_lists_url, notice: 'Data list was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 

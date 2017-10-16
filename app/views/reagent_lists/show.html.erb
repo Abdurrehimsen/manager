@@ -5,5 +5,5 @@
   <%= @reagent_list.name %>
 </p>
 
-<%= link_to 'Edit', edit_program_analyte_reagent_list_path(params[:program_id], params[:analyte_id], @reagent_list) %> |
-<%= link_to "back", program_analytes_path(params[:program_id]) %>
+<%= link_to 'Edit', params[:program_id] != nil ? edit_program_analyte_reagent_list_path(params[:program_id], params[:analyte_id], @reagent_list) : edit_reagent_list_path(@reagent_list) %> |
+<%= link_to "back", params[:program_id] != nil ? program_analytes_path(params[:program_id]) : reagent_lists_path %>

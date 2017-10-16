@@ -2,5 +2,5 @@
 
 <%= render 'form', unit_list: @unit_list %>
 
-<%= link_to 'Show', program_analyte_unit_list_path(@program, @analyte, @unit_list) %> |
-<%= link_to 'Back', program_analyte_unit_list_path(@program, @analyte, @unit_list) %>
+<%= link_to 'Show', params[:program_id] != nil ? program_analyte_unit_list_path(@program, @analyte, @unit_list) : unit_list_path(@unit_list) %> |
+<%= link_to 'Back', params[:program_id] != nil ? program_analyte_unit_list_path(@program, @analyte, @unit_list) : unit_lists_path %>

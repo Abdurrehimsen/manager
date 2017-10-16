@@ -29,10 +29,15 @@ class ModeListsController < ApplicationController
 
     respond_to do |format|
       if @mode_list.save
-        @analyte.mode_list_id = @mode_list.id
-        @analyte.save
-        format.html { redirect_to program_analyte_mode_list_path(@program, @analyte, @mode_list), notice: 'Mode list was successfully created.' }
-        format.json { render :show, status: :created, location: @mode_list }
+        if params[:program_id] != nil
+          @analyte.mode_list_id = @mode_list.id
+          @analyte.save        
+          format.html { redirect_to program_analyte_mode_list_path(@program, @analyte, @mode_list), notice: 'Mode list was successfully created.' }
+          format.json { render :show, status: :created, location: [@program, @analyte, @mode_list] }
+        else
+          format.html { redirect_to mode_list_path(@mode_list), notice: 'Mode list was successfully created.' }
+          format.json { render :show, status: :created, location: @mode_list }
+        end
       else
         format.html { render :new }
         format.json { render json: @mode_list.errors, status: :unprocessable_entity }
@@ -45,8 +50,13 @@ class ModeListsController < ApplicationController
   def update
     respond_to do |format|
       if @mode_list.update(mode_list_params)
-        format.html { redirect_to program_analyte_mode_list_path(@program, @analyte, @mode_list), notice: 'Mode list was successfully updated.' }
-        format.json { render :show, status: :ok, location: @mode_list }
+        if params[:program_id] != nil
+          format.html { redirect_to program_analyte_mode_list_path(@program, @analyte, @mode_list), notice: 'Mode list was successfully updated.' }
+          format.json { render :show, status: :ok, location: [@program, @analyte, @mode_list] }
+        else
+          format.html { redirect_to mode_list_path(@mode_list), notice: 'Mode list was successfully updated.' }
+          format.json { render :show, status: :created, location: @mode_list }
+        end
       else
         format.html { render :edit }
         format.json { render json: @mode_list.errors, status: :unprocessable_entity }
@@ -59,8 +69,14 @@ class ModeListsController < ApplicationController
   def destroy
     @mode_list.destroy
     respond_to do |format|
-      format.html { redirect_to mode_lists_url, notice: 'Mode list was successfully destroyed.' }
-      format.json { head :no_content }
+      if params[:program_id] != nil
+        format.html { redirect_to program_analytes_url(@program), notice: 'Mode list was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to mode_lists_url, notice: 'Mode list was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+
     end
   end
 

@@ -2,5 +2,5 @@
 
 <%= render 'form', reagent_list: @reagent_list %>
 
-<%= link_to 'Show', program_analyte_reagent_list_path(@program, @analyte, @reagent_list) %> |
-<%= link_to 'Back', program_analyte_reagent_list_path(@program, @analyte, @reagent_list) %>
+<%= link_to 'Show', params[:program_id] != nil ? program_analyte_reagent_list_path(@program, @analyte, @reagent_list) : reagent_list_path(@reagent_list) %> |
+<%= link_to 'Back', params[:program_id] != nil ? program_analyte_reagent_list_path(@program, @analyte, @reagent_list) : reagent_lists_path %>

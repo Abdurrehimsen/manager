@@ -15,31 +15,29 @@ class ReagentListsController < ApplicationController
 
   # GET /reagent_lists/new
   def new
-    @program = Program.find(params[:program_id])
-    @analyte = Analyte.find(params[:analyte_id])
     @reagent_list = ReagentList.new
   end
 
   # GET /reagent_lists/1/edit
   def edit
-    @program = Program.find(params[:program_id])
-    @analyte = Analyte.find(params[:analyte_id])
-    @reagent_list = @analyte.unit_list
   end
 
   # POST /reagent_lists
   # POST /reagent_lists.json
   def create
-    @program = Program.find(params[:program_id])
-    @analyte = Analyte.find(params[:analyte_id])
     @reagent_list = ReagentList.new(reagent_list_params)
 
     respond_to do |format|
       if @reagent_list.save
-        @analyte.reagent_list_id = @reagent_list.id
-        @analyte.save
-        format.html { redirect_to program_analyte_reagent_list_path(@program, @analyte, @reagent_list), notice: 'Reagent list was successfully created.' }
-        format.json { render :show, status: :created, location: @reagent_list }
+        if params[:program_id] != nil
+          @analyte.reagent_list_id = @reagent_list.id
+          @analyte.save
+          format.html { redirect_to program_analyte_reagent_list_path(@program, @analyte, @reagent_list), notice: 'Reagent list was successfully created.' }
+          format.json { render :show, status: :created, location: [@program, @analyte, @reagent_list] }
+        else
+          format.html { redirect_to reagent_list_path(@reagent_list), notice: 'Reagent list was successfully created.' }
+          format.json { render :show, status: :created, location: @reagent_list }
+        end
       else
         format.html { render :new }
         format.json { render json: @reagent_list.errors, status: :unprocessable_entity }
@@ -50,12 +48,15 @@ class ReagentListsController < ApplicationController
   # PATCH/PUT /reagent_lists/1
   # PATCH/PUT /reagent_lists/1.json
   def update
-    @program = Program.find(params[:program_id])
-    @analyte = Analyte.find(params[:analyte_id])
     respond_to do |format|
       if @reagent_list.update(reagent_list_params)
-        format.html { redirect_to program_analyte_reagent_list_path(@program, @analyte, @reagent_list), notice: 'Reagent list was successfully updated.' }
-        format.json { render :show, status: :ok, location: @reagent_list }
+        if params[:program_id] != nil
+          format.html { redirect_to program_analyte_reagent_list_path(@program, @analyte, @reagent_list), notice: 'Reagent list was successfully updated.' }
+          format.json { render :show, status: :ok, location: [@program, @analyte, @reagent_list] }
+        else
+          format.html { redirect_to reagent_list_path(@reagent_list), notice: 'Reagent list was successfully updated.' }
+          format.json { render :show, status: :created, location: @reagent_list }
+        end
       else
         format.html { render :edit }
         format.json { render json: @reagent_list.errors, status: :unprocessable_entity }
@@ -68,8 +69,13 @@ class ReagentListsController < ApplicationController
   def destroy
     @reagent_list.destroy
     respond_to do |format|
-      format.html { redirect_to program_analyte_reagent_list_path(@program, @analyte, @reagent_list), notice: 'Reagent list was successfully destroyed.' }
-      format.json { head :no_content }
+      if params[:program_id] != nil
+        format.html { redirect_to program_analytes_url(@program), notice: 'Mode list was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to reagent_lists_path, notice: 'Reagent list was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 

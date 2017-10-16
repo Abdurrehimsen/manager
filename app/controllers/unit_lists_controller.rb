@@ -28,11 +28,16 @@ class UnitListsController < ApplicationController
     @unit_list = UnitList.new(unit_list_params)
 
     respond_to do |format|
-      if @unit_list.save
-        @analyte.mode_list_id = @unit_list.id
-        @analyte.save
-        format.html { redirect_to program_analyte_unit_list_path(@program, @analyte, @unit_list), notice: 'Unit list was successfully created.' }
-        format.json { render :show, status: :created, location: @unit_list }
+      if params[:program_id] != nil
+        if @unit_list.save
+          @analyte.mode_list_id = @unit_list.id
+          @analyte.save
+          format.html { redirect_to program_analyte_unit_list_path(@program, @analyte, @unit_list), notice: 'Unit list was successfully created.' }
+          format.json { render :show, status: :created, location: [@program, @analyte, @unit_list] }
+        else
+          format.html { redirect_to unit_list_path(@unit_list), notice: 'Unit list was successfully created.' }
+          format.json { render :show, status: :created, location: @unit_list }
+        end
       else
         format.html { render :new }
         format.json { render json: @unit_list.errors, status: :unprocessable_entity }
@@ -45,8 +50,13 @@ class UnitListsController < ApplicationController
   def update
     respond_to do |format|
       if @unit_list.update(unit_list_params)
-        format.html { redirect_to program_analyte_unit_list_path(@program, @analyte, @unit_list), notice: 'Unit list was successfully updated.' }
-        format.json { render :show, status: :ok, location: @unit_list }
+        if params[:program_id] != nil
+          format.html { redirect_to program_analyte_unit_list_path(@program, @analyte, @unit_list), notice: 'Unit list was successfully updated.' }
+          format.json { render :show, status: :ok, location: [@program, @analyte, @unit_list] }
+        else
+          format.html { redirect_to unit_list_path(@unit_list), notice: 'Unit list was successfully updated.' }
+          format.json { render :show, status: :created, location: @unit_list }
+        end
       else
         format.html { render :edit }
         format.json { render json: @unit_list.errors, status: :unprocessable_entity }
@@ -59,8 +69,13 @@ class UnitListsController < ApplicationController
   def destroy
     @unit_list.destroy
     respond_to do |format|
-      format.html { redirect_to unit_lists_url, notice: 'Unit list was successfully destroyed.' }
-      format.json { head :no_content }
+      if params[:program_id] != nil
+        format.html { redirect_to program_analytes_url(@program), notice: 'Mode list was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to unit_lists_url, notice: 'Unit list was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 

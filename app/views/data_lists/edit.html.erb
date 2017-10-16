@@ -2,7 +2,7 @@
 
 <%= render 'form', data_list: @data_list %>
 
-<%= link_to 'Show', program_analyte_data_list_path(@program, @analyte, @data_list) %> |
-<%= link_to 'Back', program_analyte_data_list_path(@program, @analyte, @data_list) %>
+<%= link_to 'Show', params[:program_id] != nil ? program_analyte_data_list_path(@program, @analyte, @data_list) : data_list_path(@data_list) %> |
+<%= link_to 'Back', params[:program_id] != nil ? program_analyte_data_list_path(@program, @analyte, @data_list) : data_lists_path %>
 
 

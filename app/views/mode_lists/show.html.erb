@@ -5,5 +5,5 @@
   <%= @mode_list.name %>
 </p>
 
-<%= link_to 'Edit', edit_program_analyte_mode_list_path(params[:program_id], params[:analyte_id], @mode_list) %> |
-<%= link_to "back", program_analytes_path(params[:program_id]) %>
+<%= link_to 'Edit', params[:program_id] != nil ? edit_program_analyte_mode_list_path(params[:program_id], params[:analyte_id], @mode_list) : edit_mode_list_path(@mode_list) %> |
+<%= link_to "back", params[:program_id] != nil ? program_analytes_path(params[:program_id]) : mode_lists_path %>
