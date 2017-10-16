@@ -1,5 +1,6 @@
 class ModeListsController < ApplicationController
   before_action :set_mode_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_inheritenced_vars, only: [:show, :edit, :create, :update, :destroy]
 
   # GET /mode_lists
   # GET /mode_lists.json
@@ -14,22 +15,16 @@ class ModeListsController < ApplicationController
 
   # GET /mode_lists/new
   def new
-    @program = Program.find(params[:program_id])
-    @analyte = Analyte.find(params[:analyte_id])
     @mode_list = ModeList.new
   end
 
   # GET /mode_lists/1/edit
   def edit
-    @program = Program.find(params[:program_id])
-    @analyte = Analyte.find(params[:analyte_id])
   end
 
   # POST /mode_lists
   # POST /mode_lists.json
   def create
-    @program = Program.find(params[:program_id])
-    @analyte = Analyte.find(params[:analyte_id])
     @mode_list = ModeList.new(mode_list_params)
 
     respond_to do |format|
@@ -48,8 +43,6 @@ class ModeListsController < ApplicationController
   # PATCH/PUT /mode_lists/1
   # PATCH/PUT /mode_lists/1.json
   def update
-    @program = Program.find(params[:program_id])
-    @analyte = Analyte.find(params[:analyte_id])
     respond_to do |format|
       if @mode_list.update(mode_list_params)
         format.html { redirect_to program_analyte_mode_list_path(@program, @analyte, @mode_list), notice: 'Mode list was successfully updated.' }
@@ -72,6 +65,12 @@ class ModeListsController < ApplicationController
   end
 
   private
+    def set_inheritenced_vars
+      if params[:program_id] != nil && params[:analyte_id] != nil
+        @program = Program.find(params[:program_id])
+        @analyte = Analyte.find(params[:analyte_id])
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_mode_list
       @mode_list = ModeList.find(params[:id])

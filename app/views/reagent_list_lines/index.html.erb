@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Reagent List Lines</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reagent_list_lines.each do |reagent_list_line| %>
+      <tr>
+        <td><%= reagent_list_line.name %></td>
+        <td><%= link_to 'Show', reagent_list_line %></td>
+        <td><%= link_to 'Edit', edit_reagent_list_line_path(reagent_list_line) %></td>
+        <td><%= link_to 'Destroy', reagent_list_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reagent List Line', new_reagent_list_line_path %>

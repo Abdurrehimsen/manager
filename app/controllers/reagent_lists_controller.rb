@@ -1,5 +1,6 @@
 class ReagentListsController < ApplicationController
   before_action :set_reagent_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_inheritenced_vars, only: [:show, :edit, :create, :update, :destroy]
 
   # GET /reagent_lists
   # GET /reagent_lists.json
@@ -73,6 +74,12 @@ class ReagentListsController < ApplicationController
   end
 
   private
+    def set_inheritenced_vars
+      if params[:program_id] != nil && params[:analyte_id] != nil
+        @program = Program.find(params[:program_id])
+        @analyte = Analyte.find(params[:analyte_id])
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_reagent_list
       @reagent_list = ReagentList.find(params[:id])

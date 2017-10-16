@@ -1,5 +1,6 @@
 class DataListsController < ApplicationController
   before_action :set_data_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_inheritenced_vars, only: [:show, :edit, :create, :update, :destroy]
 
   # GET /data_lists
   # GET /data_lists.json
@@ -14,22 +15,16 @@ class DataListsController < ApplicationController
 
   # GET /data_lists/new
   def new
-    @program = Program.find(params[:program_id])
-    @analyte = Analyte.find(params[:analyte_id])
     @data_list = DataList.new
   end
 
   # GET /data_lists/1/edit
   def edit
-    @program = Program.find(params[:program_id])
-    @analyte = Analyte.find(params[:analyte_id])
   end
 
   # POST /data_lists
   # POST /data_lists.json
   def create
-    @program = Program.find(params[:program_id])
-    @analyte = Analyte.find(params[:analyte_id])
     @data_list = DataList.new(data_list_params)
 
     respond_to do |format|
@@ -48,8 +43,6 @@ class DataListsController < ApplicationController
   # PATCH/PUT /data_lists/1
   # PATCH/PUT /data_lists/1.json
   def update
-    @program = Program.find(params[:program_id])
-    @analyte = Analyte.find(params[:analyte_id])
     respond_to do |format|
       if @data_list.update(data_list_params)
         format.html { redirect_to program_analyte_data_list_path(@program, @analyte, @data_list), notice: 'Data list was successfully updated.' }
@@ -72,6 +65,12 @@ class DataListsController < ApplicationController
   end
 
   private
+    def set_inheritenced_vars
+      if params[:program_id] != nil && params[:analyte_id] != nil
+        @program = Program.find(params[:program_id])
+        @analyte = Analyte.find(params[:analyte_id])
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_data_list
       @data_list = DataList.find(params[:id])
