@@ -14,9 +14,9 @@
     <% @reagent_list_lines.each do |reagent_list_line| %>
       <tr>
         <td><%= reagent_list_line.name %></td>
-        <td><%= link_to 'Show', reagent_list_line %></td>
-        <td><%= link_to 'Edit', edit_reagent_list_line_path(reagent_list_line) %></td>
-        <td><%= link_to 'Destroy', reagent_list_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', reagent_list_reagent_list_line(@reagent_list, reagent_list_line) %></td>
+        <td><%= link_to 'Edit', edit_reagent_list_reagent_list_line(@reagent_list, reagent_list_line) %></td>
+        <td><%= link_to 'Destroy', [@reagent_list, reagent_list_line], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Reagent List Line', new_reagent_list_line_path %>
+<%= link_to 'New Reagent List Line', new_reagent_list_reagent_list_line_path %>

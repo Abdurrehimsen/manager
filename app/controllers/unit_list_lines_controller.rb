@@ -1,10 +1,10 @@
 class UnitListLinesController < ApplicationController
   before_action :set_unit_list_line, only: [:show, :edit, :update, :destroy]
+  before_action :set_inheritenced_vars, only: [:show, :edit, :create, :update, :destroy]
 
   # GET /unit_list_lines
   # GET /unit_list_lines.json
   def index
-    @unit_list = UnitList.find(params[:unit_list_id])
     @unit_list_lines = @unit_list.unit_list_lines
   end
 
@@ -15,25 +15,22 @@ class UnitListLinesController < ApplicationController
 
   # GET /unit_list_lines/new
   def new
-    @unit_list = UnitList.find(params[:unit_list_id])
     @unit_list_line = UnitListLine.new
   end
 
   # GET /unit_list_lines/1/edit
   def edit
-    @unit_list = UnitList.find(params[:unit_list_id])
   end
 
   # POST /unit_list_lines
   # POST /unit_list_lines.json
   def create
-    @unit_list = UnitList.find(params[:unit_list_id])
     @unit_list_line = UnitListLine.new(unit_list_line_params)
 
     respond_to do |format|
       if @unit_list_line.save
         format.html { redirect_to unit_list_unit_list_lines_url(@unit_list), notice: 'Unit list line was successfully created.' }
-        format.json { render :show, status: :created, location: @unit_list_line }
+        format.json { render :show, status: :created, location: [@unit_list, @unit_list_line] }
       else
         format.html { render :new }
         format.json { render json: @unit_list_line.errors, status: :unprocessable_entity }
@@ -48,7 +45,7 @@ class UnitListLinesController < ApplicationController
     respond_to do |format|
       if @unit_list_line.update(unit_list_line_params)
         format.html { redirect_to unit_list_unit_list_lines_url(@unit_list), notice: 'Unit list line was successfully updated.' }
-        format.json { render :show, status: :ok, location: @unit_list_line }
+        format.json { render :show, status: :ok, location: [@unit_list, @unit_list_line] }
       else
         format.html { render :edit }
         format.json { render json: @unit_list_line.errors, status: :unprocessable_entity }
@@ -68,6 +65,9 @@ class UnitListLinesController < ApplicationController
   end
 
   private
+    def set_inheritenced_vars
+      @unit_list = UnitList.find(params[:unit_list_id])
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_unit_list_line
       @unit_list_line = UnitListLine.find(params[:id])

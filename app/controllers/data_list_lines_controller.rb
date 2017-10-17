@@ -1,10 +1,11 @@
 class DataListLinesController < ApplicationController
   before_action :set_data_list_line, only: [:show, :edit, :update, :destroy]
+  before_action :set_inheritenced_vars, only: [:show, :edit, :create, :update, :destroy]
+
 
   # GET /data_list_lines
   # GET /data_list_lines.json
   def index
-    @data_list = DataList.find(params[:data_list_id])
     @data_list_lines = @data_list.data_list_lines
   end
 
@@ -15,25 +16,22 @@ class DataListLinesController < ApplicationController
 
   # GET /data_list_lines/new
   def new
-    @data_list = DataList.find(params[:data_list_id])
     @data_list_line = DataListLine.new
   end
 
   # GET /data_list_lines/1/edit
   def edit
-    @data_list = DataList.find(params[:data_list_id])
   end
 
   # POST /data_list_lines
   # POST /data_list_lines.json
   def create
-    @data_list = DataList.find(params[:data_list_id])
     @data_list_line = DataListLine.new(data_list_line_params)
 
     respond_to do |format|
       if @data_list_line.save
         format.html { redirect_to data_list_data_list_lines_url(@data_list), notice: 'Data list line was successfully created.' }
-        format.json { render :show, status: :created, location: @data_list_line }
+        format.json { render :show, status: :created, location: [@data_list, @data_list_line] }
       else
         format.html { render :new }
         format.json { render json: @data_list_line.errors, status: :unprocessable_entity }
@@ -48,7 +46,7 @@ class DataListLinesController < ApplicationController
     respond_to do |format|
       if @data_list_line.update(data_list_line_params)
         format.html { redirect_to data_list_data_list_lines_url(@data_list), notice: 'Data list line was successfully updated.' }
-        format.json { render :show, status: :ok, location: @data_list_line }
+        format.json { render :show, status: :ok, location: [@data_list, @data_list_line] }
       else
         format.html { render :edit }
         format.json { render json: @data_list_line.errors, status: :unprocessable_entity }
@@ -68,6 +66,9 @@ class DataListLinesController < ApplicationController
   end
 
   private
+    def set_inheritenced_vars
+      @data_list = DataList.find(params[:data_list_id])
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_data_list_line
       @data_list_line = DataListLine.find(params[:id])

@@ -1,4 +1,4 @@
-<%= form_with(model: data_list_line, local: true) do |form| %>
+<%= form_with(model: [@data_list, data_list_line], local: true) do |form| %>
   <% if data_list_line.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(data_list_line.errors.count, "error") %> prohibited this data_list_line from being saved:</h2>

@@ -16,9 +16,9 @@
       <tr>
         <td><%= unit_list_line.name %></td>
         <td><%= unit_list_line.value %></td>
-        <td><%= link_to 'Show', unit_list_line %></td>
-        <td><%= link_to 'Edit', edit_unit_list_line_path(unit_list_line) %></td>
-        <td><%= link_to 'Destroy', unit_list_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', unit_list_unit_list_line(@unit_list, unit_list_line) %></td>
+        <td><%= link_to 'Edit', edit_unit_list_unit_list_line(@unit_list, unit_list_line) %></td>
+        <td><%= link_to 'Destroy', [@unit_list, unit_list_line], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Unit List Line', new_unit_list_line_path %>
+<%= link_to 'New Unit List Line', new_unit_list_unit_list_line_path %>
