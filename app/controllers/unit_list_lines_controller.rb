@@ -1,6 +1,6 @@
 class UnitListLinesController < ApplicationController
   before_action :set_unit_list_line, only: [:show, :edit, :update, :destroy]
-  before_action :set_inheritenced_vars, only: [:show, :edit, :create, :update, :destroy]
+  before_action :set_inheritenced_vars, only: [:index, :show, :new,  :edit, :create, :update, :destroy]
 
   # GET /unit_list_lines
   # GET /unit_list_lines.json
@@ -15,7 +15,7 @@ class UnitListLinesController < ApplicationController
 
   # GET /unit_list_lines/new
   def new
-    @unit_list_line = UnitListLine.new
+    @unit_list_line = @unit_list.unit_list_lines.build
   end
 
   # GET /unit_list_lines/1/edit
@@ -25,7 +25,7 @@ class UnitListLinesController < ApplicationController
   # POST /unit_list_lines
   # POST /unit_list_lines.json
   def create
-    @unit_list_line = UnitListLine.new(unit_list_line_params)
+    @unit_list_line = @unit_list.unit_list_lines.build(unit_list_line_params)
 
     respond_to do |format|
       if @unit_list_line.save
@@ -56,7 +56,6 @@ class UnitListLinesController < ApplicationController
   # DELETE /unit_list_lines/1
   # DELETE /unit_list_lines/1.json
   def destroy
-    @unit_list = UnitList.find(params[:unit_list_id])
     @unit_list_line.destroy
     respond_to do |format|
       format.html { redirect_to unit_list_unit_list_lines_url(@unit_list), notice: 'Unit list line was successfully destroyed.' }

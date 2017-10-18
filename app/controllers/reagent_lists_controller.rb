@@ -1,6 +1,6 @@
 class ReagentListsController < ApplicationController
   before_action :set_reagent_list, only: [:show, :edit, :update, :destroy]
-  before_action :set_inheritenced_vars, only: [:show, :edit, :create, :update, :destroy]
+  before_action :set_inheritenced_vars, only: [:show, :edit,:new, :create, :update, :destroy]
 
   # GET /reagent_lists
   # GET /reagent_lists.json

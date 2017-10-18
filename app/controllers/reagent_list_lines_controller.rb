@@ -1,6 +1,6 @@
 class ReagentListLinesController < ApplicationController
   before_action :set_reagent_list_line, only: [:show, :edit, :update, :destroy]
-  before_action :set_inheritenced_vars, only: [:show, :edit, :create, :update, :destroy]
+  before_action :set_inheritenced_vars, only: [:index, :show, :new, :edit, :create, :update, :destroy]
 
   # GET /reagent_list_lines
   # GET /reagent_list_lines.json
@@ -15,7 +15,7 @@ class ReagentListLinesController < ApplicationController
 
   # GET /reagent_list_lines/new
   def new
-    @reagent_list_line = ReagentListLine.new
+    @reagent_list_line = @reagent_list.reagent_list_lines.build
   end
 
   # GET /reagent_list_lines/1/edit
@@ -25,7 +25,7 @@ class ReagentListLinesController < ApplicationController
   # POST /reagent_list_lines
   # POST /reagent_list_lines.json
   def create
-    @reagent_list_line = ReagentListLine.new(reagent_list_line_params)
+    @reagent_list_line = @reagent_list.reagent_list_lines.build(reagent_list_line_params)
 
     respond_to do |format|
       if @reagent_list_line.save

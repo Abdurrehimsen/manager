@@ -1,6 +1,6 @@
 class ModeListLinesController < ApplicationController
   before_action :set_mode_list_line, only: [:show, :edit, :update, :destroy]
-  before_action :set_inheritenced_vars, only: [:show, :edit, :create, :update, :destroy]
+  before_action :set_inheritenced_vars, only: [:index,  :new, :show, :edit, :create, :update, :destroy]
 
   # GET /mode_list_lines
   # GET /mode_list_lines.json
@@ -15,7 +15,7 @@ class ModeListLinesController < ApplicationController
 
   # GET /mode_list_lines/new
   def new
-    @mode_list_line = ModeListLine.new
+    @mode_list_line = @mode_list.mode_list_lines.build
   end
 
   # GET /mode_list_lines/1/edit
@@ -25,7 +25,7 @@ class ModeListLinesController < ApplicationController
   # POST /mode_list_lines
   # POST /mode_list_lines.json
   def create
-    @mode_list_line = ModeListLine.new(mode_list_line_params)
+    @mode_list_line = @mode_list.mode_list_lines.build(mode_list_line_params)
 
     respond_to do |format|
       if @mode_list_line.save

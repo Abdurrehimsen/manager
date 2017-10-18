@@ -14,8 +14,8 @@
     <% @mode_list_lines.each do |mode_list_line| %>
       <tr>
         <td><%= mode_list_line.name %></td>
-        <td><%= link_to 'Show', mode_list_mode_list_line(@mode_list, mode_list_line) %></td>
-        <td><%= link_to 'Edit', edit_mode_list_mode_list_line(@mode_list, mode_list_line) %></td>
+        <td><%= link_to 'Show', mode_list_mode_list_line_url(@mode_list, mode_list_line) %></td>
+        <td><%= link_to 'Edit', edit_mode_list_mode_list_line_path(@mode_list, mode_list_line) %></td>
         <td><%= link_to 'Destroy', [@mode_list, mode_list_line], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

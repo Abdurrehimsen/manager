@@ -1,6 +1,6 @@
 class ModeListsController < ApplicationController
   before_action :set_mode_list, only: [:show, :edit, :update, :destroy]
-  before_action :set_inheritenced_vars, only: [:show, :edit, :create, :update, :destroy]
+  before_action :set_inheritenced_vars, only: [:show, :edit, :new, :create, :update, :destroy]
 
   # GET /mode_lists
   # GET /mode_lists.json

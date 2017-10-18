@@ -13,7 +13,7 @@
   <tbody>
     <% @mode_lists.each do |mode_list| %>
       <tr>
-        <td><%= mode_list.name %></td>
+        <td><%= link_to mode_list.name, mode_list_mode_list_lines_url(mode_list) %></td>
         <td><%= link_to 'Show', mode_list %></td>
         <td><%= link_to 'Edit', edit_mode_list_path(mode_list) %></td>
         <td><%= link_to 'Destroy', mode_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>

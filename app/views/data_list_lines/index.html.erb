@@ -14,8 +14,8 @@
     <% @data_list_lines.each do |data_list_line| %>
       <tr>
         <td><%= data_list_line.value %></td>
-        <td><%= link_to 'Show', data_list_data_list_line(@data_list, data_list_line) %></td>
-        <td><%= link_to 'Edit', edit_data_list_data_list_line(@data_list, data_list_line) %></td>
+        <td><%= link_to 'Show', data_list_data_list_line_url(@data_list, data_list_line) %></td>
+        <td><%= link_to 'Edit', edit_data_list_data_list_line_path(@data_list, data_list_line) %></td>
         <td><%= link_to 'Destroy', [@data_list, data_list_line], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

@@ -1,6 +1,6 @@
 class DataListsController < ApplicationController
   before_action :set_data_list, only: [:show, :edit, :update, :destroy]
-  before_action :set_inheritenced_vars, only: [:show, :edit, :create, :update, :destroy]
+  before_action :set_inheritenced_vars, only: [:show, :new, :edit, :create, :update, :destroy]
 
   # GET /data_lists
   # GET /data_lists.json

@@ -1,6 +1,6 @@
 class UnitListsController < ApplicationController
   before_action :set_unit_list, only: [:show, :edit, :update, :destroy]
-  before_action :set_inheritenced_vars, only: [:show, :edit, :create, :update, :destroy]
+  before_action :set_inheritenced_vars, only: [:show, :edit, :new, :create, :update, :destroy]
 
   # GET /unit_lists
   # GET /unit_lists.json

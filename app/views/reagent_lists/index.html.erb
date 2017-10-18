@@ -13,7 +13,7 @@
   <tbody>
     <% @reagent_lists.each do |reagent_list| %>
       <tr>
-        <td><%= reagent_list.name %></td>
+        <td><%= link_to reagent_list.name, reagent_list_reagent_list_lines_url(reagent_list) %></td>
         <td><%= link_to 'Show', reagent_list %></td>
         <td><%= link_to 'Edit', edit_reagent_list_path(reagent_list) %></td>
         <td><%= link_to 'Destroy', reagent_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>

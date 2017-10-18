@@ -1,6 +1,6 @@
 class DataListLinesController < ApplicationController
   before_action :set_data_list_line, only: [:show, :edit, :update, :destroy]
-  before_action :set_inheritenced_vars, only: [:show, :edit, :create, :update, :destroy]
+  before_action :set_inheritenced_vars, only: [:index, :show, :new, :edit, :create, :update, :destroy]
 
 
   # GET /data_list_lines
@@ -16,7 +16,7 @@ class DataListLinesController < ApplicationController
 
   # GET /data_list_lines/new
   def new
-    @data_list_line = DataListLine.new
+    @data_list_line = @data_list.data_list_lines.build
   end
 
   # GET /data_list_lines/1/edit
@@ -26,7 +26,7 @@ class DataListLinesController < ApplicationController
   # POST /data_list_lines
   # POST /data_list_lines.json
   def create
-    @data_list_line = DataListLine.new(data_list_line_params)
+    @data_list_line = @data_list.data_list_lines.build(data_list_line_params)
 
     respond_to do |format|
       if @data_list_line.save
@@ -57,7 +57,6 @@ class DataListLinesController < ApplicationController
   # DELETE /data_list_lines/1
   # DELETE /data_list_lines/1.json
   def destroy
-    @data_list = DataList.find(params[:data_list_id])
     @data_list_line.destroy
     respond_to do |format|
       format.html { redirect_to data_list_data_list_lines_url(@data_list), notice: 'Data list line was successfully destroyed.' }
