@@ -1,28 +1,13 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Programs</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @programs.each do |program| %>
-      <tr>
-        <td><%= link_to program.name, program_analytes_url(program) %></td>
-        <td><%= link_to 'Show', program %></td>
-        <td><%= link_to 'Edit', edit_program_path(program) %></td>
-        <td><%= link_to 'Destroy', program, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Program', new_program_path %>
+<h2 align="center">Programlar</h1></br>
+<% @programs.each do |program| %>
+  <div class="col-md-4">
+    <div align="center" class="message">
+          <h2 align="center" class="message-title"><%= link_to program.name, program_analytes_url(program) %></h2>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-custom"><%= link_to 'Show', program%></button>
+            <button type="button" class="btn btn-custom"><%= link_to 'Edit', edit_program_path(program)%></button>
+            <button type="button" class="btn btn-custom"><%= link_to 'Destroy', program,method: :delete, data: { confirm: 'Are you sure?' } %></button>
+          </div>
+    </div>
+  </div>
+<% end %>

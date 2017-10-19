@@ -4,6 +4,8 @@
   <strong>Name:</strong>
   <%= @analyte.name %>
 </p>
-
-<%= link_to 'Edit', edit_program_analyte_path(@program, @analyte) %>
-<%= link_to 'Back', program_analytes_url(@program) %>
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary"><%= link_to 'Edit', edit_program_analyte_path(@program, @analyte)%></button>
+  <button type="button" class="btn btn-secondary"><%= link_to 'Destroy', [@program, @analyte], method: :delete, data: { confirm: 'Are you sure?' } %></button>
+  <button type="button" class="btn btn-secondary"><%= link_to 'Back', program_analytes_url(@program) %></button>
+</div>
